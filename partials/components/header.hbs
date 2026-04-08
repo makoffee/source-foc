@@ -1,0 +1,16 @@
+{{#match headerStyle "!=" "Off"}}
+
+    {{#match headerStyle "Highlight"}}
+        {{> "components/header-content"}}
+    {{else match headerStyle "Magazine"}}
+        {{> "components/header-content"}}
+    {{else}}
+        {{#match headerStyle "Landing"}}
+            {{!-- Removed @member and @site.members_enabled check --}}
+            {{> "components/header-content"}}
+        {{else}}
+            {{> "components/header-content"}}
+        {{/match}}
+    {{/match}}
+
+{{/match}}

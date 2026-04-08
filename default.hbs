@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="{{@site.locale}}">
+<head>
+
+    <title>{{meta_title}}</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    {{!-- Bunny Fonts: GDPR Compliant CDN --}}
+    <link rel="preconnect" href="https://fonts.bunny.net">
+    
+    {{!-- Core Styles --}}
+    <link rel="stylesheet" type="text/css" href="{{asset "built/screen.css"}}">
+
+    <style>
+        :root {
+            --background-color: {{@custom.site_background_color}}
+        }
+    </style>
+
+    {{ghost_head}}
+
+</head>
+<body class="{{body_class}}">
+
+<div class="gh-viewport">
+    
+    {{> "components/navigation" navigationLayout=@custom.navigation_layout}}
+
+    {{{body}}}
+    
+    {{> "components/footer"}}
+    
+</div>
+
+{{#is "post, page"}}
+    {{> "lightbox"}}
+{{/is}}
+
+{{!-- Theme Scripts --}}
+<script src="{{asset "built/source.js"}}"></script>
+
+{{!-- Background Contrast Logic: Moved to footer to prevent forced layout --}}
+<script>
+    (function () {
+        const accentColor = getComputedStyle(document.documentElement).getPropertyValue('--background-color').trim().replace('#', '');
+        let r, g, b;
+
+        if (accentColor.length === 3) {
+            r = parseInt(accentColor[0] + accentColor[0], 16);
+            g = parseInt(accentColor[1] + accentColor[1], 16);
+            b = parseInt(accentColor[2] + accentColor[2], 16);
+        } else {
+            r = parseInt(accentColor.substr(0, 2), 16);
+            g = parseInt(accentColor.substr(2, 2), 16);
+            b = parseInt(accentColor.substr(4, 2), 16);
+        }
+
+        const yiq = ((r * 299) + (g * 587) + (b * 114)) / 1000;
+        const textColor = (yiq >= 128) ? 'dark' : 'light';
+
+        document.documentElement.classList.add(`has-${textColor}-text`);
+    })();
+</script>
+
+{{ghost_foot}}
+
+</body>
+</html>

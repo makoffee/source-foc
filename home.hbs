@@ -1,0 +1,43 @@
+{{!< default}}
+
+{{> "components/header" headerStyle=@custom.header_style}}
+
+<main class="site-main">
+
+    {{#get "pages" filter="slug:coalition-block" as |p|}}{{#foreach p}}
+        <section id="coalition" class="gh-home-block"><div class="gh-canvas">{{content}}</div></section>
+    {{/foreach}}{{/get}}
+
+    {{#get "pages" filter="slug:mission-block" as |p|}}{{#foreach p}}
+        <section id="mission" class="gh-home-block"><div class="gh-canvas">{{content}}</div></section>
+    {{/foreach}}{{/get}}
+
+    {{#get "pages" filter="slug:members-block" as |p|}}{{#foreach p}}
+        <section id="members" class="gh-home-block"><div class="gh-canvas">{{content}}</div></section>
+    {{/foreach}}{{/get}}
+
+    {{#get "pages" filter="slug:logo-block" as |p|}}{{#foreach p}}
+        <section id="logos" class="gh-home-block is-logo-grid"><div class="gh-canvas">{{content}}</div></section>
+    {{/foreach}}{{/get}}
+
+    {{#get "pages" filter="slug:cta-block" as |p|}}{{#foreach p}}
+        <section id="call-to-action" class="gh-home-block"><div class="gh-canvas">{{content}}</div></section>
+    {{/foreach}}{{/get}}
+
+    {{!-- News Section --}}
+    {{#get "posts" filter="featured:true" limit="3" include="authors,tags" as |featured_posts|}}
+        {{#if featured_posts}}
+            <section class="gh-container is-grid gh-outer">
+                <div class="gh-inner">
+                    <h2 class="gh-container-title">Latest News</h2>
+                    <div class="gh-feed">
+                        {{#foreach featured_posts}}
+                            {{> "post-card" lazyLoad=true}}
+                        {{/foreach}}
+                    </div>
+                </div>
+            </section>
+        {{/if}}
+    {{/get}}
+
+</main>
