@@ -3526,3 +3526,81 @@ html {
   background-color: transparent;
   border: none;
 }
+
+/* --- TAG TEMPLATE OVERRIDES (brand reskin) --- */
+
+/* Tag archive: remove stroke */
+.tag-template .gh-archive-inner {
+    border-bottom: 0;
+}
+
+/* Tag archive header: match feed gutters (full width container) */
+.tag-template .gh-archive:not(.has-sidebar):not(.has-image) .gh-archive-inner {
+    grid-column: 1 / -1;
+}
+
+/* Tag header: constrain text to ~66% on desktop */
+@media (min-width: 1200px) {
+    .tag-template .gh-archive-inner {
+        display: grid;
+        grid-template-columns: repeat(16, 1fr);
+        column-gap: var(--grid-gap);
+        row-gap: var(--grid-gap);
+    }
+
+    /* ~66% = 11/16 columns */
+    .tag-template .gh-archive-wrapper {
+        grid-column: 1 / span 11;
+        min-width: 0;
+    }
+
+    .tag-template .gh-archive .gh-article-image {
+        grid-column: 12 / -1;
+        min-width: 0;
+    }
+}
+
+/* Tag hero (when tag has a featured image) */
+.tag-template .gh-tag-hero {
+    position: relative;
+    overflow: hidden;
+    padding-block: clamp(72px, 6vw, 120px);
+    padding-inline: var(--container-gap);
+    border-radius: 16px;
+    background-color: var(--color-darker-gray);
+    background-image: var(--tag-feature-image);
+    background-size: cover;
+    background-position: center;
+}
+
+.tag-template .gh-tag-hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        90deg,
+        rgb(0 0 0 / 0.70) 0%,
+        rgb(0 0 0 / 0.45) 55%,
+        rgb(0 0 0 / 0.30) 100%
+    );
+}
+
+.tag-template .gh-tag-hero > * {
+    position: relative;
+    z-index: 1;
+}
+
+.tag-template .gh-archive.has-image .gh-article-title,
+.tag-template .gh-archive.has-image .gh-article-excerpt {
+    color: var(--color-white);
+}
+
+/* Let grid columns control the line length */
+.tag-template .gh-archive.has-image .gh-article-excerpt {
+    max-width: none;
+}
+
+/* Tag feed gutter: match homepage sections (full container width) */
+.tag-template .gh-container:not(.has-sidebar) :is(.gh-container-title, .gh-main, .gh-more) {
+    grid-column: 1 / -1;
+}

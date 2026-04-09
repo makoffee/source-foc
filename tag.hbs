@@ -5,14 +5,16 @@
 
     {{#tag}}
         <section class="gh-archive{{#if feature_image}} has-image{{/if}}{{#if @custom.show_publication_info_sidebar}} has-sidebar{{/if}} gh-inner">
-            <div class="gh-archive-inner">
+            <div class="gh-archive-inner{{#if feature_image}} gh-tag-hero{{/if}}"{{#if feature_image}} style="--tag-feature-image: url({{img_url feature_image size="xl"}});"{{/if}}>
                 <header class="gh-archive-wrapper">
                     <h1 class="gh-article-title is-title">{{name}}</h1>
                     {{#if description}}
                         <p class="gh-article-excerpt">{{description}}</p>
                     {{/if}}
                 </header>
-                {{> "feature-image"}}
+                {{#unless feature_image}}
+                    {{> "feature-image"}}
+                {{/unless}}
             </div>
         </section>
     {{/tag}}
