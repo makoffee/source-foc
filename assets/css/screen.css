@@ -3604,3 +3604,10 @@ html {
 .tag-template .gh-container:not(.has-sidebar) :is(.gh-container-title, .gh-main, .gh-more) {
     grid-column: 1 / -1;
 }
+
+/* Latest News / tag feed: keep cards to one column width on desktop */
+@media (min-width: 768px) {
+    :is(.home-template, .tag-template) .gh-container.is-grid .gh-feed {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}

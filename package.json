@@ -95,24 +95,6 @@
                 ],
                 "default": "Background color"
             },
-            "title_font": {
-                "type": "select",
-                "options": [
-                    "Poppins",
-                    "PT Serif",
-                    "Inter"
-                ],
-                "default": "Poppins"
-            },
-            "body_font": {
-                "type": "select",
-                "options": [
-                    "PT Serif",
-                    "Inter",
-                    "Poppins"
-                ],
-                "default": "PT Serif"
-            },
             "signup_heading": {
                 "type": "text",
                 "description": "Used in your footer across your theme, defaults to site title when empty"
