@@ -8,23 +8,13 @@
                 </nav>
 
                 <div class="gh-footer-social">
-                    {{#if @site.facebook}}
-                        <a href="{{social_url type="facebook"}}" target="_blank" rel="noopener" aria-label="Facebook">
-                            <img src="{{asset "images/facebook.svg"}}" alt="Facebook" width="38" height="38">
+                    {{#social_accounts @site}}
+                        <a href="{{href}}" target="_blank" rel="noopener" aria-label="{{name}}">
+                            {{#> (concat "icons/" type)}}
+                                <span class="gh-footer-social-fallback">{{name}}</span>
+                            {{/undefined}}
                         </a>
-                    {{/if}}
-
-                    {{#if @site.twitter}}
-                        <a href="{{social_url type="twitter"}}" target="_blank" rel="noopener" aria-label="Instagram">
-                            <img src="{{asset "images/instagram.svg"}}" alt="Instagram" width="38" height="38">
-                        </a>
-                    {{/if}}
-
-                    {{#if @custom.linkedin_url}}
-                        <a href="{{@custom.linkedin_url}}" target="_blank" rel="noopener" aria-label="LinkedIn">
-                            <img src="{{asset "images/linkedin.svg"}}" alt="LinkedIn" width="38" height="38">
-                        </a>
-                    {{/if}}
+                    {{/social_accounts}}
                 </div>
             </div>
 

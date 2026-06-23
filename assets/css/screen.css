@@ -3492,7 +3492,7 @@ body[class*=" gh-font-heading"]:not(.gh-font-heading-fira-sans):not(.gh-font-hea
     opacity: 0.7;
 }
 
-.gh-footer-social img {
+.gh-footer-social :is(img, svg) {
     width: 38px !important;
     height: 38px !important;
     display: block !important;
@@ -3609,5 +3609,154 @@ html {
 @media (min-width: 768px) {
     :is(.home-template, .tag-template) .gh-container.is-grid .gh-feed {
         grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* Post & page reading content: larger body text without affecting nav/footer/home */
+:is(.post-template, .page-template) .gh-article {
+    --content-font-size: 2rem;
+}
+
+:is(.post-template, .page-template) .gh-article-excerpt {
+    font-size: clamp(1.9rem, 0.23vw + 1.81rem, 2.1rem);
+}
+
+/* Post hero banner (featured image cover) */
+.post-template .gh-article-header.has-feature-image {
+    margin-top: clamp(24px, 3vw, 40px);
+    margin-bottom: clamp(32px, 4vw, 48px);
+}
+
+.post-template .gh-post-hero {
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    overflow: hidden;
+    width: 100%;
+    min-height: clamp(320px, 45vw, 520px);
+    border-radius: 16px;
+    background-color: var(--color-darker-gray);
+    background-image: var(--post-feature-image);
+    background-position: center;
+    background-size: cover;
+}
+
+.post-template .gh-post-hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: linear-gradient(
+        to top,
+        rgb(0 0 0 / 0.88) 0%,
+        rgb(0 0 0 / 0.50) 42%,
+        rgb(0 0 0 / 0.22) 100%
+    );
+}
+
+.post-template .gh-post-hero-inner {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    padding: clamp(28px, 5vw, 64px);
+    color: var(--color-white);
+}
+
+.post-template .gh-post-hero-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+
+.post-template .gh-post-hero-tags.is-plain {
+    margin-bottom: 12px;
+}
+
+.post-template .gh-post-hero-tag {
+    display: inline-block;
+    padding: 6px 14px;
+    border: 1px solid rgb(255 255 255 / 0.35);
+    border-radius: 999px;
+    background: rgb(255 255 255 / 0.18);
+    backdrop-filter: blur(4px);
+    color: var(--color-white);
+    font-size: 1.3rem;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    line-height: 1;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: background 0.2s ease;
+}
+
+.post-template .gh-post-hero-tags.is-plain .gh-post-hero-tag {
+    border-color: var(--color-border);
+    background: var(--color-lighter-gray);
+    color: var(--ghost-accent-color);
+}
+
+.post-template .gh-post-hero-tag:hover {
+    background: rgb(255 255 255 / 0.28);
+}
+
+.post-template .gh-post-hero-tags.is-plain .gh-post-hero-tag:hover {
+    background: rgb(0 0 0 / 0.08);
+}
+
+.post-template .gh-post-hero .gh-article-title {
+    max-width: 900px;
+    color: var(--color-white);
+}
+
+.post-template .gh-post-hero .gh-article-excerpt {
+    max-width: 720px;
+    color: rgb(255 255 255 / 0.92);
+}
+
+.post-template .gh-post-hero-author {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 8px 16px;
+    margin-top: clamp(16px, 2vw, 24px);
+    color: rgb(255 255 255 / 0.9);
+    font-size: 1.6rem;
+    font-weight: 500;
+    line-height: 1.3;
+}
+
+.post-template .gh-post-hero-author-name a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.post-template .gh-post-hero-author-name a:hover {
+    text-decoration: underline;
+}
+
+.post-template .gh-post-hero-author-date,
+.post-template .gh-post-hero-author-reading {
+    color: rgb(255 255 255 / 0.75);
+    font-size: 1.35rem;
+    font-weight: 500;
+}
+
+.post-template .gh-post-hero-caption {
+    margin-top: 12px;
+    color: var(--color-secondary-text);
+    font-size: 1.4rem;
+    line-height: 1.4;
+    text-align: center;
+}
+
+@media (max-width: 767px) {
+    .post-template .gh-post-hero {
+        min-height: clamp(280px, 70vw, 400px);
+        border-radius: 12px;
+    }
+
+    .post-template .gh-post-hero-inner {
+        padding: 24px 20px;
     }
 }

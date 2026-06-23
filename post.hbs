@@ -7,42 +7,84 @@
 
     <article class="gh-article {{post_class}}">
 
-        <header class="gh-article-header gh-canvas">
+        <header class="gh-article-header{{#if feature_image}} has-feature-image gh-outer{{else}} gh-canvas{{/if}}">
 
-            {{#if primary_tag}}
-                <a class="gh-article-tag" href="{{primary_tag.url}}">{{primary_tag.name}}</a>
-            {{/if}}
-            <h1 class="gh-article-title is-title">{{title}}</h1>
-            {{#if custom_excerpt}}
-                <p class="gh-article-excerpt is-body">{{custom_excerpt}}</p>
-            {{/if}}
-
-            {{#if @custom.show_post_metadata}}
-            <div class="gh-article-meta">
-                <div class="gh-article-author-image instapaper_ignore">
-                    {{#foreach authors}}
-                        {{#if profile_image}}
-                            <a href="{{url}}">
-                                <img class="author-profile-image" src="{{img_url profile_image size="xs"}}" alt="{{name}}">
-                            </a>
+            {{#if feature_image}}
+                <div class="gh-inner">
+                    <div class="gh-post-hero" style="--post-feature-image: url({{img_url feature_image size="xl"}});">
+                        <div class="gh-post-hero-inner">
+                        {{#if tags}}
+                            <div class="gh-post-hero-tags">
+                                {{#foreach tags}}
+                                    <a class="gh-post-hero-tag" href="{{url}}">{{name}}</a>
+                                {{/foreach}}
+                            </div>
+                        {{/if}}
+                        <h1 class="gh-article-title is-title">{{title}}</h1>
+                        {{#if custom_excerpt}}
+                            <p class="gh-article-excerpt is-body">{{custom_excerpt}}</p>
                         {{else}}
-                            <a href="{{url}}">{{> "icons/avatar"}}</a>
+                            {{#if excerpt}}
+                                <p class="gh-article-excerpt is-body">{{excerpt}}</p>
+                            {{/if}}
                         {{/if}}
-                    {{/foreach}}
+                        <p class="gh-post-hero-author">
+                            <span class="gh-post-hero-author-name">{{authors}}</span>
+                            {{#if @custom.show_post_metadata}}
+                                <time class="gh-post-hero-author-date" datetime="{{date format="YYYY-MM-DD"}}">{{date format="DD MMM YYYY"}}</time>
+                                {{#if reading_time}}
+                                    <span class="gh-post-hero-author-reading">{{reading_time}}</span>
+                                {{/if}}
+                            {{/if}}
+                        </p>
+                        </div>
+                    </div>
+                    {{#if feature_image_caption}}
+                        <figcaption class="gh-post-hero-caption">{{feature_image_caption}}</figcaption>
+                    {{/if}}
                 </div>
-                <div class="gh-article-meta-wrapper">
-                    <h4 class="gh-article-author-name">{{authors}}</h4>
-                    <div class="gh-article-meta-content">
-                        <time class="gh-article-meta-date" datetime="{{date format="YYYY-MM-DD"}}">{{date format="DD MMM YYYY"}}</time>
-                        {{#if reading_time}}
-                            <span class="gh-article-meta-length"><span class="bull">—</span> {{reading_time}}</span>
-                        {{/if}}
+            {{else}}
+                {{#if tags}}
+                    <div class="gh-post-hero-tags is-plain">
+                        {{#foreach tags}}
+                            <a class="gh-post-hero-tag" href="{{url}}">{{name}}</a>
+                        {{/foreach}}
+                    </div>
+                {{/if}}
+                <h1 class="gh-article-title is-title">{{title}}</h1>
+                {{#if custom_excerpt}}
+                    <p class="gh-article-excerpt is-body">{{custom_excerpt}}</p>
+                {{else}}
+                    {{#if excerpt}}
+                        <p class="gh-article-excerpt is-body">{{excerpt}}</p>
+                    {{/if}}
+                {{/if}}
+
+                {{#if @custom.show_post_metadata}}
+                <div class="gh-article-meta">
+                    <div class="gh-article-author-image instapaper_ignore">
+                        {{#foreach authors}}
+                            {{#if profile_image}}
+                                <a href="{{url}}">
+                                    <img class="author-profile-image" src="{{img_url profile_image size="xs"}}" alt="{{name}}">
+                                </a>
+                            {{else}}
+                                <a href="{{url}}">{{> "icons/avatar"}}</a>
+                            {{/if}}
+                        {{/foreach}}
+                    </div>
+                    <div class="gh-article-meta-wrapper">
+                        <h4 class="gh-article-author-name">{{authors}}</h4>
+                        <div class="gh-article-meta-content">
+                            <time class="gh-article-meta-date" datetime="{{date format="YYYY-MM-DD"}}">{{date format="DD MMM YYYY"}}</time>
+                            {{#if reading_time}}
+                                <span class="gh-article-meta-length"><span class="bull">—</span> {{reading_time}}</span>
+                            {{/if}}
+                        </div>
                     </div>
                 </div>
-            </div>
+                {{/if}}
             {{/if}}
-
-            {{> "feature-image"}}
 
         </header>
 
